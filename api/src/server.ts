@@ -1,24 +1,41 @@
-import { getPostgresClient } from "./postgres";
+import { AppDataSource } from "./postgres";
 import express from "express";
+import { appendFile } from "fs";
+import Photo from "../db/Photo";
 
 /** Connect to the database then start the API server */
-getPostgresClient()
-  .then((pgClient) => {
-    const app = express();
-
-    app.get("/", (req, res) => {
-      res.send("Hello world!");
-    });
-
-    app.get("/now", async (req, res) => {
-      const data = await pgClient.query("SELECT NOW() as now");
-      res.send(data.rows[0].now);
-    });
-
-    app.listen(8080, () => {
-      console.log("API server ready at http://localhost:8080");
-    });
+AppDataSource.initialize()
+  .then(() => {
+    // here you can start to work with your database
+    console.log("Data Source has been initialized!");
   })
-  .catch((err) => {
-    console.error("Error connecting to postgres: ", err);
-  });
+  .catch((error) => console.error("Error connecting to postgres: ", error));
+
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello world!");
+});
+
+app.listen(8080, () => {
+  console.log("API server ready at http://localhost:8080");
+});
+
+app.get("/hello", async (req, res) => {
+  try {
+    const photo = await Photo.findOne({
+      where: {
+        id: 1,
+      },
+      relations: ["photographer_id", "collection_id"],
+    });
+    if (!photo) {
+      res.status(404).send();
+      return;
+    }
+    res.status(200).send(photo.asAPIObject());
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal server error");
+  }
+});
