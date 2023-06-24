@@ -1,6 +1,7 @@
 import { Client } from "pg";
 import { DataSource } from "typeorm";
 import Collection from "../db/Collection";
+import { SnakeNamingStrategy } from "typeorm-naming-strategies";
 import Photo from "../db/Photo";
 import Photographer from "../db/Photographer";
 
@@ -15,5 +16,6 @@ export const AppDataSource = new DataSource({
   database: process.env.POSTGRES_DB,
   synchronize: false,
   logging: true,
+  namingStrategy: new SnakeNamingStrategy(),
   entities: [Photo, Collection, Photographer],
 });

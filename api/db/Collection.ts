@@ -18,7 +18,7 @@ class Collection extends BaseEntity {
   @Column({ type: "varchar" })
   title: string;
 
-  @OneToMany(() => Photo, (ph) => ph.collection_id)
+  @OneToMany(() => Photo, (ph) => ph.collectionId)
   photos: Photo[];
 
   asAPIObject() {

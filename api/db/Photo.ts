@@ -15,11 +15,15 @@ class Photo extends BaseEntity {
   @PrimaryGeneratedColumn({ type: "int4" })
   id: number;
 
+  @Column({ type: "int4" })
+  photographerId: number;
   @ManyToOne(() => Photographer, (pg) => pg.photos)
-  photographer_id?: Photographer;
+  photographer: Photographer;
 
+  @Column({ type: "int4" })
+  collectionId: number;
   @ManyToOne(() => Collection, (co) => co.photos)
-  collection_id?: Collection;
+  collection: Collection;
 
   @Column({ type: "varchar" })
   url: string;
@@ -36,8 +40,8 @@ class Photo extends BaseEntity {
   asAPIObject() {
     return {
       id: this.id,
-      photographer_id: this.photographer_id.asAPIObject(),
-      collection_id: this.collection_id.asAPIObject(),
+      photographer: this.photographer.asAPIObject(),
+      collection: this.collection.asAPIObject(),
       url: this.url,
       description: this.description,
       height: this.height,

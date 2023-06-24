@@ -25,15 +25,15 @@ class Photographer extends BaseEntity {
   bio: string;
 
   @Column({ type: "varchar", nullable: true })
-  profile_image_url: string;
+  profileImageUrl: string;
 
   @Column({ type: "varchar", nullable: true })
-  twtter_username: string;
+  twitterUsername: string;
 
   @Column({ type: "varchar", nullable: true })
-  instagram_username: string;
+  instagramUsername: string;
 
-  @OneToMany(() => Photo, (ph) => ph.photographer_id)
+  @OneToMany(() => Photo, (ph) => ph.photographerId)
   photos: Photo[];
 
   asAPIObject() {
@@ -42,9 +42,9 @@ class Photographer extends BaseEntity {
       name: this.name,
       location: this.location,
       bio: this.bio,
-      profile_image_url: this.profile_image_url,
-      twtter_username: this.twtter_username,
-      instagram_username: this.instagram_username,
+      profileImageUrl: this.profileImageUrl,
+      twtterUsername: this.twitterUsername,
+      instagramUsername: this.instagramUsername,
     };
   }
 }

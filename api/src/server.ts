@@ -27,7 +27,7 @@ app.get("/hello", async (req, res) => {
       where: {
         id: 1,
       },
-      relations: ["photographer_id", "collection_id"],
+      relations: ["photographer", "collection"],
     });
     if (!photo) {
       res.status(404).send();
