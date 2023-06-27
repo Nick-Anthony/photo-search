@@ -4,6 +4,7 @@ import { appendFile } from "fs";
 import Photo from "../db/Photo";
 import listCollection from "../handlers/listCollection";
 import cors from "cors";
+import listPhotos from "../handlers/listPhotos";
 
 /** Connect to the database then start the API server */
 AppDataSource.initialize()
@@ -49,3 +50,5 @@ app.get("/hello", async (req, res) => {
 });
 
 app.get("/collection", listCollection);
+
+app.get("/photos", listPhotos);

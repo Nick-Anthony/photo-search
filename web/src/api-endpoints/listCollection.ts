@@ -1,12 +1,12 @@
 import apiFetch from "./apiFetch";
 
-export interface Collection {
+export interface PhotoCollection {
   id: number;
   title: string;
 }
 
 export interface ListCollection {
-  results: Collection[];
+  results: PhotoCollection[];
 }
 
 async function listCollection(): Promise<ListCollection> {
