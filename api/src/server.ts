@@ -2,6 +2,8 @@ import { AppDataSource } from "./postgres";
 import express from "express";
 import { appendFile } from "fs";
 import Photo from "../db/Photo";
+import listCollection from "../handlers/listCollection";
+import cors from "cors";
 
 /** Connect to the database then start the API server */
 AppDataSource.initialize()
@@ -12,6 +14,12 @@ AppDataSource.initialize()
   .catch((error) => console.error("Error connecting to postgres: ", error));
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
@@ -39,3 +47,5 @@ app.get("/hello", async (req, res) => {
     res.status(500).send("Internal server error");
   }
 });
+
+app.get("/collection", listCollection);

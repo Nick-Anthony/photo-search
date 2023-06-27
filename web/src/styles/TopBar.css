@@ -1,0 +1,48 @@
+.topBar {
+  background-color: #050417;
+  height: 120px;
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  z-index: 0;
+
+}
+
+
+.icon {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.topBar input[type=text] {
+   width:450px;
+   height: 50px;
+   margin-left: auto;
+   margin-right: auto;
+   border-radius: 4px;
+   background: var(--ffffff, #FFF);
+
+   position: relative;
+   z-index: 1;
+
+  }
+
+  
+  .topBar button {
+    width: 246px;
+    height: 50px;
+    border-radius: 25px;
+    background: #2A2B8D;
+    margin-left: auto;
+    margin-right: 106px;
+    position: relative;
+    z-index: 1;
+  }
+
