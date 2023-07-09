@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import listCollection, {
   ListCollection,
 } from "../api-endpoints/listCollection";
+import { Form } from "../App";
 import "../styles/Dropdown.css";
 
 interface DropdownProps {
   placeholder: string;
+  callback: Function;
+  data?: Form;
+  showPhoto: boolean;
 }
 
 const Icon = () => {
@@ -17,10 +21,10 @@ const Icon = () => {
 };
 
 function Dropdown(props: DropdownProps) {
-  const { placeholder } = props;
+  const { placeholder, callback, data, showPhoto } = props;
   const [showMenu, setShowMenu] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("");
   const [list, setList] = useState<ListCollection>();
+
   useEffect(() => {
     const handler = () => setShowMenu(false);
 
@@ -35,8 +39,8 @@ function Dropdown(props: DropdownProps) {
   }, []);
 
   const getDisplay = () => {
-    if (selectedValue) {
-      return selectedValue;
+    if (data?.collection) {
+      return data?.collection.name;
     }
     return placeholder;
   };
@@ -57,16 +61,17 @@ function Dropdown(props: DropdownProps) {
           </div>
         </div>
         {showMenu &&
+          !showPhoto &&
           list &&
           list.results.map((collection) => (
             <div
               key={collection.id}
               className={
-                selectedValue === collection.title
+                data?.collection?.name === collection.title
                   ? "dropdown-item selected"
                   : "dropdown-item"
               }
-              onClick={() => setSelectedValue(collection.title)}
+              onClick={() => callback(collection.id, collection.title)}
             >
               {collection.title}
             </div>

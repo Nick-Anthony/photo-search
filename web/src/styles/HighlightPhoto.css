@@ -1,0 +1,25 @@
+.HighlightPhoto{
+    width: 940px;
+    height: 804px;
+    margin-left: auto;
+    top: 195px;
+    margin-right: auto;
+    position: relative;
+    z-index: 2;
+    background-color: white;
+}
+
+.Container{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 1;
+
+}
+
+.Photo {
+    width: 890px;
+    height: 635px;
+    margin: 25px;
+}

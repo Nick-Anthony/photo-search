@@ -1,22 +1,40 @@
-import { useState } from "react";
+import { Dispatch, FormEventHandler, SetStateAction } from "react";
+import { Form } from "../App";
 import "../styles/TopBar.css";
 import { ReactComponent as TopBarIcon } from "../topBarIcon.svg";
 import Dropdown from "./Dropdown";
 
-function TopBar() {
-  const [name, setName] = useState("");
+interface TopBarProps {
+  form?: Form;
+  setForm: Dispatch<SetStateAction<Form>>;
+  handleSubmit: FormEventHandler<HTMLFormElement>;
+  showPhoto: boolean;
+}
+
+function TopBar(props: TopBarProps) {
+  const { form, setForm, handleSubmit, showPhoto } = props;
+
+  function handleCollection(id: number, name: string) {
+    setForm({ ...form, collection: { id: id, name: name } });
+  }
+
   return (
-    <div className="topBar">
+    <form onSubmit={handleSubmit} className="topBar">
       <TopBarIcon className="icon" />
       <input
         type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={form?.query}
+        onChange={(e) => setForm({ ...form, query: e.target.value })}
         placeholder="Query"
       />
-      <Dropdown placeholder="Select..." />
-      <button>Search</button>
-    </div>
+      <Dropdown
+        placeholder="Select..."
+        callback={handleCollection}
+        data={form}
+        showPhoto={showPhoto}
+      />
+      <button type="submit">Search</button>
+    </form>
   );
 }
 export default TopBar;

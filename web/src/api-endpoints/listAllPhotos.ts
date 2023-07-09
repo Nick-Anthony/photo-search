@@ -6,9 +6,9 @@ export interface Photographer {
   name: string;
   location?: string;
   bio?: string;
-  profile_image_url?: string;
-  twitter_username?: string;
-  instagram_username?: string;
+  profileImageUrl?: string;
+  twitterUsername?: string;
+  instagramUsername?: string;
 }
 
 export interface Photo {
@@ -21,9 +21,9 @@ export interface Photo {
   width: number;
 }
 
-async function listPhotos(): Promise<Photo[]> {
-  const res = await apiFetch("/photos");
+async function listAllPhotos(): Promise<Photo[]> {
+  const res = await apiFetch("/listAllPhotos");
   return res.json();
 }
 
-export default listPhotos;
+export default listAllPhotos;

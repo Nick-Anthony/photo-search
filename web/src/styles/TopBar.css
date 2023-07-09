@@ -1,8 +1,9 @@
 .topBar {
   background-color: #050417;
   height: 120px;
+  width: 100%;
   display: flex;
-  position: relative;
+  position: sticky;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
@@ -11,7 +12,6 @@
   z-index: 0;
 
 }
-
 
 .icon {
     margin-top: 25px;

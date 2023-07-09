@@ -4,7 +4,9 @@ import { appendFile } from "fs";
 import Photo from "../db/Photo";
 import listCollection from "../handlers/listCollection";
 import cors from "cors";
-import listPhotos from "../handlers/listPhotos";
+import listAllPhotos from "../handlers/listAllPhotos";
+import { listPhotos } from "../handlers/listPhotos";
+import { query } from "express-validator";
 
 /** Connect to the database then start the API server */
 AppDataSource.initialize()
@@ -51,4 +53,12 @@ app.get("/hello", async (req, res) => {
 
 app.get("/collection", listCollection);
 
-app.get("/photos", listPhotos);
+app.get("/listAllPhotos", listAllPhotos);
+
+app.get(
+  "/listPhotos",
+  query("collectionId").isInt(),
+  query("query").isString().isLength({ max: 50 }).escape(),
+  express.json(),
+  listPhotos
+);
