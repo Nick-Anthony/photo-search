@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap');
+:root{
+  --grey: #D5D7E5;
+  --black: #050417;
+}
+
 
 .test {
     position: relative;
@@ -14,7 +20,6 @@
     overflow: visible;
     border:rgba(213, 215, 229, 0.7) solid 1px;
     max-height: 300px;
-    padding-left: 5px;
     width: 400px;
     max-width: 400px;
     border-radius: 4px;
@@ -22,21 +27,32 @@
     z-index: 9999;
 
   }
-  /* .dropdown-container:after{
+  .test:before{
     content:"";
     overflow: hidden;
     position:absolute; top:10px; bottom:10px; left:10px; right:10px;
     border-radius:4px;
     box-shadow: rgba(213, 215, 229, 0.7) 0 15px 0px 0px;
     z-index: -1;
-  } */
+  }
 
   .dropdown-selected-value {
-    color: var(--050417, #050417);
+    color: var(--black);
     font-size: 14px;
-    font-family: Open Sans;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 600;
     z-index: 9999;
+    padding-left: 22px;
+
+  }
+
+  .dropdown-selected-Collections {
+    color: var(--grey);
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    z-index: 9999;
+    padding-left: 22px;
 
   }
   
@@ -76,4 +92,8 @@
     z-index: 9999;
     background-color: #0d6efd;
     color: #fff;
+}
+
+.dropdown-tool{
+  padding-right: 18px;
 }
