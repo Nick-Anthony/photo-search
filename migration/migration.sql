@@ -304,7 +304,7 @@ COPY public.photographer (id, name, location, bio, profile_image_url, twitter_us
 5	Michael Baccin	Venice (Italy)	I'm a Creative based in Venice Italy. Working on Websites during the week, Photography and Videomaker on the weekends.	\N	\N	michaelbaccin
 6	Jan Antonin Kolar	Munich	\N	\N	jankolario	jankolario
 7	Benjamin Suter	Chicago, IL	Benjamin is an urban, lifestyle photographer living in Chicago who loves to incorporate storytelling into his photos. His willingness to always learn and adapt within the creative industry comes out in his ability to capture the story in the moment.	\N	benjaminsuter	benjaminjsuter
-8	Bertrand Bouchez	Andernos Les Bains, France	We make films and this is our portfolio : \r\nhttps://vimeo.com/studiodolly\r\n	\N	\N	https://www.instagram.com/dollyfilms/?hl=fr
+8	Bertrand Bouchez	Andernos Les Bains, France	We make films and this is our portfolio : \r\nhttps://vimeo.com/studiodolly\r\n	\N	\N	\N
 9	Yohei Shimomae	Vancouver, BC	UX Designer at Adobe. Most photos taken with Fujifilm x100s and X-T2. Instagram @yoheishimomae	\N	yoheis	yoheishimomae
 10	Al Soot	Japan	Photosensitive images.	\N	\N	\N
 11	Adrien Olichon	France	French, 22. Web Student. Passionate about Design. \r\npaypal.me/aolichon	\N	adrien_lch	adrien.lch
