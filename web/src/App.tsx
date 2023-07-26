@@ -78,10 +78,21 @@ function App() {
 
   function showPhotos() {
     if (submitting) {
-      return <p>loading</p>;
+      return (
+        <div className="loading">
+          <div
+            className="loader"
+            style={{ color: "black", width: "80px" }}
+          ></div>
+        </div>
+      );
     }
     if (errors) {
-      return <p>error</p>;
+      return (
+        <div className="error">
+          <p className="error-text">Error Statement</p>
+        </div>
+      );
     }
     if (!photos.length) {
       return <p>no images</p>;

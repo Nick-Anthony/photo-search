@@ -1,38 +1,64 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap');
+:root{
+  --grey: #D5D7E5;
+  --black: #050417;
+  --red: #FF4A4A;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.error {
+  width: 65.28vw;
+  margin-left: auto;
+  margin-right: auto;
+  
+  border-radius: 4px;
+  background: rgba(255, 74, 74, 0.1)
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.error-text {
+  color: var(--red);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 62px;
+  padding-left: 30px;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.App-link {
-  color: #61dafb;
+.loader {
+  width: 150px; /* control the size */
+  aspect-ratio: 1;
+  display: grid;
+  -webkit-mask: conic-gradient(from 15deg, #0003,#000);
+          mask: conic-gradient(from 15deg, #0003,#000);
+  animation: load 1s steps(12) infinite;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.loader,
+.loader:before,
+.loader:after{
+  background:
+    radial-gradient(circle closest-side ,currentColor 90%,#0000 98%) 
+    50% -150%/20% 80% repeat-y,
+    radial-gradient(circle closest-side ,currentColor 90%,#0000 98%) 
+    -150% 50%/80% 20% repeat-x;
+}
+.loader:before,
+.loader:after{
+  content: "";
+  grid-area: 1/1;
+  transform: rotate(30deg);
+}
+.loader:after{
+  transform: rotate(60deg);
+}
+@keyframes load {
+  from {transform: rotate(0turn)}
+  to   {transform: rotate(1turn)}
 }
