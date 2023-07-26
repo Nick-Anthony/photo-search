@@ -22,13 +22,14 @@ function TopBar(props: TopBarProps) {
     <form onSubmit={handleSubmit} className="topBar">
       <TopBarIcon className="icon" />
       <input
+        className={`text-input-${form?.query ? "filled" : "empty"}`}
         type="text"
         value={form?.query}
         onChange={(e) => setForm({ ...form, query: e.target.value })}
         placeholder="Query"
       />
       <Dropdown
-        placeholder="Select..."
+        placeholder="Collections"
         callback={handleCollection}
         data={form}
         showPhoto={showPhoto}
