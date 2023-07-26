@@ -15,21 +15,19 @@ function ImageGrid(props: ImageGridProps) {
 
   return (
     <div className="container">
-      <div className="grid">
-        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-          <Masonry gutter="10px">
-            {photos.map((photo) => (
-              <img
-                key={photo.id}
-                src={photo.url}
-                onClick={showPhoto ? undefined : (e) => handleClick(e, photo)}
-                style={{ width: "100%", display: "block" }}
-                alt={photo.description}
-              />
-            ))}
-          </Masonry>
-        </ResponsiveMasonry>
-      </div>
+      <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
+        <Masonry gutter="20px">
+          {photos.map((photo) => (
+            <img
+              key={photo.id}
+              src={photo.url}
+              onClick={showPhoto ? undefined : (e) => handleClick(e, photo)}
+              style={{ width: "100%", display: "block" }}
+              alt={photo.description}
+            />
+          ))}
+        </Masonry>
+      </ResponsiveMasonry>
     </div>
   );
 
