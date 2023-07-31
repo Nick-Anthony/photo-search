@@ -1,14 +1,24 @@
 import { Photo } from "../api-endpoints/listAllPhotos";
-import React, { useEffect, useRef } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
 import "../styles/HighlightPhoto.css";
+import {
+  Navigate,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 
 interface PhotoProps {
-  photo?: Photo;
-  callback: Function;
+  photos: Photo[];
+  setShowPhoto: Dispatch<SetStateAction<boolean>>;
 }
 
-function HighlightPhoto(props: PhotoProps) {
-  const { photo, callback } = props;
+function HighlightPhoto() {
+  const { photos, setShowPhoto }: PhotoProps = useOutletContext();
+
+  const navigate = useNavigate();
+
+  const { id } = useParams();
 
   const showPictureRef = useRef<HTMLDivElement>(null);
 
@@ -18,12 +28,19 @@ function HighlightPhoto(props: PhotoProps) {
         showPictureRef.current &&
         !showPictureRef.current.contains(e.target as Node)
       ) {
-        callback();
+        setShowPhoto(false);
+        navigate("/photos");
       }
     };
 
     document.addEventListener("click", handleHidePicture, true);
-  }, [callback]);
+  }, [setShowPhoto, navigate]);
+
+  if (!id) {
+    return <p>Error</p>;
+  }
+
+  const photo = photos.find((p) => p.id === parseInt(id));
 
   return (
     <div className="Container">

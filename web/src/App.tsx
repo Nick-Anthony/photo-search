@@ -5,6 +5,7 @@ import listAllPhotos, { Photo } from "./api-endpoints/listAllPhotos";
 import ImageGrid from "./components/ImageGrid";
 import apiFetch from "./api-endpoints/apiFetch";
 import HighlightPhoto from "./components/HighlightPhoto";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export interface Form {
   query?: string;
@@ -21,6 +22,8 @@ export interface ValidationError {
 }
 
 function App() {
+  const navigate = useNavigate();
+
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [form, setForm] = useState<Form>({
     query: "",
@@ -29,22 +32,14 @@ function App() {
   const [submitting, setSubmitting] = useState(false);
 
   const [showPhoto, setShowPhoto] = useState(false);
-  const [clickedPhoto, setClickedPhoto] = useState<Photo>();
 
   useEffect(() => {
     listAllPhotos().then((p) => setPhotos(p));
-  }, []);
+    //navigate("/photos");
+  }, [navigate]);
 
   return (
     <>
-      {showPhoto ? (
-        <HighlightPhoto
-          photo={clickedPhoto}
-          callback={() => setShowPhoto(false)}
-        />
-      ) : (
-        <></>
-      )}
       <TopBar
         form={form}
         setForm={setForm}
@@ -74,6 +69,7 @@ function App() {
       setPhotos(data);
     }
     setSubmitting(false);
+    navigate("/photos");
   }
 
   function showPhotos() {
@@ -97,14 +93,7 @@ function App() {
     if (!photos.length) {
       return <p>no images</p>;
     }
-    return (
-      <ImageGrid
-        photos={photos}
-        setShowPhoto={setShowPhoto}
-        setClickedPhoto={setClickedPhoto}
-        showPhoto={showPhoto}
-      />
-    );
+    return <Outlet context={{ photos, setShowPhoto, showPhoto }} />;
   }
 }
 export default App;
