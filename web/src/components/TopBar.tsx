@@ -1,26 +1,40 @@
-import { Dispatch, FormEventHandler, SetStateAction } from "react";
-import { Form } from "../App";
+import { FormEvent, useEffect, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import "../styles/TopBar.css";
 import { ReactComponent as TopBarIcon } from "../topBarIcon.svg";
 import Dropdown from "./Dropdown";
 
-interface TopBarProps {
-  form?: Form;
-  setForm: Dispatch<SetStateAction<Form>>;
-  handleSubmit: FormEventHandler<HTMLFormElement>;
-  showPhoto: boolean;
+export interface Form {
+  query?: string;
+  collectionId?: number;
 }
 
-function TopBar(props: TopBarProps) {
-  const { form, setForm, handleSubmit, showPhoto } = props;
+function TopBar() {
+  const [searchParams] = useSearchParams();
+  const [form, setForm] = useState<Form>({
+    query: "",
+  });
 
-  function handleCollection(id: number, name: string) {
-    setForm({ ...form, collection: { id: id, name: name } });
+  useEffect(() => {
+    const query = searchParams.get("query") || "";
+    const collectionId = searchParams.get("collectionId");
+
+    if (collectionId) {
+      setForm({ query: query, collectionId: parseInt(collectionId) });
+    }
+  }, [searchParams]);
+
+  const navigate = useNavigate();
+
+  function handleCollection(id: number) {
+    setForm({ ...form, collectionId: id });
   }
 
   return (
     <form onSubmit={handleSubmit} className="topBar">
-      <TopBarIcon className="icon" />
+      <Link to={"/"}>
+        <TopBarIcon className="icon" />
+      </Link>
       <input
         className={`text-input-${form?.query ? "filled" : "empty"}`}
         type="text"
@@ -32,10 +46,20 @@ function TopBar(props: TopBarProps) {
         placeholder="Collections"
         callback={handleCollection}
         data={form}
-        showPhoto={showPhoto}
       />
       <button type="submit">Search</button>
     </form>
   );
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    const params = {
+      query: form?.query,
+      collectionId: form?.collectionId?.toString(),
+    };
+    const urlParams = new URLSearchParams(params as Record<string, string>);
+
+    navigate(`/?${urlParams.toString()}`);
+  }
 }
 export default TopBar;

@@ -9,16 +9,13 @@ import {
 } from "react-router-dom";
 
 interface PhotoProps {
-  photos: Photo[];
-  setShowPhoto: Dispatch<SetStateAction<boolean>>;
+  photo?: Photo;
+  onClick: Function;
 }
 
-function HighlightPhoto() {
-  const { photos, setShowPhoto }: PhotoProps = useOutletContext();
+function HighlightPhoto(props: PhotoProps) {
+  const { photo, onClick } = props;
 
-  const navigate = useNavigate();
-
-  const { id } = useParams();
 
   const showPictureRef = useRef<HTMLDivElement>(null);
 
@@ -28,19 +25,13 @@ function HighlightPhoto() {
         showPictureRef.current &&
         !showPictureRef.current.contains(e.target as Node)
       ) {
-        setShowPhoto(false);
-        navigate("/photos");
+        onClick();
       }
     };
 
     document.addEventListener("click", handleHidePicture, true);
-  }, [setShowPhoto, navigate]);
+  }, [onClick]);
 
-  if (!id) {
-    return <p>Error</p>;
-  }
-
-  const photo = photos.find((p) => p.id === parseInt(id));
 
   return (
     <div className="Container">
