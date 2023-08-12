@@ -1,12 +1,8 @@
 import express from "express";
 import { validationResult } from "express-validator";
 import { ILike } from "typeorm";
+import Collection from "../db/Collection";
 import Photo from "../db/Photo";
-
-interface listPhotosInput {
-  query: string;
-  collection: { id: number; name: string };
-}
 
 export const listPhotos = async (
   req: express.Request,
@@ -17,6 +13,13 @@ export const listPhotos = async (
   const id = parseInt(req.query.collectionId as string);
   if (!validation.isEmpty()) {
     return res.status(400).send({ errors: validation.array() });
+  }
+
+  const collectionExists = await Collection.findOneBy({ id: id });
+
+  if (!collectionExists) {
+    res.status(404).send();
+    return;
   }
 
   try {

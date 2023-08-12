@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600;700;800&display=swap');
+:root{
+  --grey: #D5D7E5;
+  --black: #050417;
+  --red: #FF4A4A;
+}
+
+.error {
+  width: 65.28vw;
+  margin-left: auto;
+  margin-right: auto;
+  
+  border-radius: 4px;
+  background: rgba(255, 74, 74, 0.1)
+}
+
+.error-text {
+  color: var(--red);
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 62px;
+  padding-left: 30px;
+
+}

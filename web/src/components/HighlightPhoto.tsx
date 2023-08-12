@@ -4,11 +4,11 @@ import "../styles/HighlightPhoto.css";
 
 interface PhotoProps {
   photo?: Photo;
-  callback: Function;
+  onClick: Function;
 }
 
 function HighlightPhoto(props: PhotoProps) {
-  const { photo, callback } = props;
+  const { photo, onClick } = props;
 
   const showPictureRef = useRef<HTMLDivElement>(null);
 
@@ -18,12 +18,12 @@ function HighlightPhoto(props: PhotoProps) {
         showPictureRef.current &&
         !showPictureRef.current.contains(e.target as Node)
       ) {
-        callback();
+        onClick();
       }
     };
 
     document.addEventListener("click", handleHidePicture, true);
-  }, [callback]);
+  }, [onClick]);
 
   return (
     <div className="Container">

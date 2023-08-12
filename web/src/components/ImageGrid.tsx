@@ -7,11 +7,10 @@ interface ImageGridProps {
   photos: Photo[];
   setShowPhoto: Dispatch<SetStateAction<boolean>>;
   setClickedPhoto: Dispatch<SetStateAction<Photo | undefined>>;
-  showPhoto: boolean;
 }
 
 function ImageGrid(props: ImageGridProps) {
-  const { photos, setShowPhoto, setClickedPhoto, showPhoto } = props;
+  const { photos, setShowPhoto, setClickedPhoto } = props;
 
   return (
     <div className="container">
@@ -21,7 +20,7 @@ function ImageGrid(props: ImageGridProps) {
             <img
               key={photo.id}
               src={photo.url}
-              onClick={showPhoto ? undefined : (e) => handleClick(e, photo)}
+              onClick={(e) => handleClick(e, photo)}
               style={{ width: "100%", display: "block" }}
               alt={photo.description}
             />
@@ -36,7 +35,6 @@ function ImageGrid(props: ImageGridProps) {
     photo: Photo
   ) {
     e.stopPropagation();
-    console.log(photo);
     setClickedPhoto(photo);
     setShowPhoto(true);
   }

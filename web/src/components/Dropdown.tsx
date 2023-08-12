@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import listCollection, {
   ListCollection,
 } from "../api-endpoints/listCollection";
-import { Form } from "../App";
+
 import "../styles/Dropdown.css";
+import { Form } from "./TopBar";
 
 interface DropdownProps {
   placeholder: string;
   callback: Function;
   data?: Form;
-  showPhoto: boolean;
 }
 
 const Icon = () => {
@@ -30,7 +30,7 @@ const Icon = () => {
 };
 
 function Dropdown(props: DropdownProps) {
-  const { placeholder, callback, data, showPhoto } = props;
+  const { placeholder, callback, data } = props;
   const [showMenu, setShowMenu] = useState(false);
   const [list, setList] = useState<ListCollection>();
 
@@ -48,8 +48,8 @@ function Dropdown(props: DropdownProps) {
   }, []);
 
   const getDisplay = () => {
-    if (data?.collection) {
-      return data?.collection.name;
+    if (data?.collectionId) {
+      return list?.results.find((c) => c.id === data.collectionId)?.title;
     }
     return placeholder;
   };
@@ -64,7 +64,7 @@ function Dropdown(props: DropdownProps) {
         <div onClick={handleMenuClick} className="dropdown-input">
           <div
             className={`dropdown-selected-${
-              data?.collection ? "value" : placeholder
+              data?.collectionId ? "value" : placeholder
             }`}
           >
             {getDisplay()}
@@ -76,13 +76,12 @@ function Dropdown(props: DropdownProps) {
           </div>
         </div>
         {showMenu &&
-          !showPhoto &&
           list &&
           list.results.map((collection) => (
             <div
               key={collection.id}
               className={
-                data?.collection?.name === collection.title
+                data?.collectionId === collection.id
                   ? "dropdown-item selected"
                   : "dropdown-item"
               }
