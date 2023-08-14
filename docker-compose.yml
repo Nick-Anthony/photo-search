@@ -7,7 +7,7 @@ services:
       - ./.data/postgres:/var/lib/postgresql/data
       - ./migration:/migration
     env_file:
-      - .env
+      - .development.env
     expose: ["5432"]
     ports: ["5432:5432"]
 
@@ -21,7 +21,7 @@ services:
     environment:
       CHOKIDAR_USEPOLLING: "true"
     env_file:
-      - .env
+      - .development.env
     ports: ["8080:8080"]
 
   web:
@@ -33,5 +33,7 @@ services:
       - "./web:/app/web"
     environment:
       CHOKIDAR_USEPOLLING: "true"
+    env_file:
+      - .development.env
     expose: ["3000"]
     ports: ["3000:3000"]
