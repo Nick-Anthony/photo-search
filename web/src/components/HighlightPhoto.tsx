@@ -1,12 +1,6 @@
 import { Photo } from "../api-endpoints/listAllPhotos";
-import React, { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "../styles/HighlightPhoto.css";
-import {
-  Navigate,
-  useNavigate,
-  useOutletContext,
-  useParams,
-} from "react-router-dom";
 
 interface PhotoProps {
   photo?: Photo;
@@ -15,7 +9,6 @@ interface PhotoProps {
 
 function HighlightPhoto(props: PhotoProps) {
   const { photo, onClick } = props;
-
 
   const showPictureRef = useRef<HTMLDivElement>(null);
 
@@ -31,7 +24,6 @@ function HighlightPhoto(props: PhotoProps) {
 
     document.addEventListener("click", handleHidePicture, true);
   }, [onClick]);
-
 
   return (
     <div className="Container">

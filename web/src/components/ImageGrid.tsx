@@ -2,7 +2,6 @@ import { Photo } from "../api-endpoints/listAllPhotos";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import React, { Dispatch, SetStateAction } from "react";
 import "../styles/ImageGrid.css";
-import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
 
 interface ImageGridProps {
   photos: Photo[];
@@ -29,7 +28,6 @@ function ImageGrid(props: ImageGridProps) {
         </Masonry>
       </ResponsiveMasonry>
     </div>
-
   );
 
   function handleClick(
@@ -39,7 +37,6 @@ function ImageGrid(props: ImageGridProps) {
     e.stopPropagation();
     setClickedPhoto(photo);
     setShowPhoto(true);
-    navigate(`/photos/${photo.id}`);
     console.log("hello");
   }
 }
