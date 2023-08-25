@@ -20,7 +20,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://photo-search.me",
+    origin: "http://localhost:3000",
   })
 );
 
